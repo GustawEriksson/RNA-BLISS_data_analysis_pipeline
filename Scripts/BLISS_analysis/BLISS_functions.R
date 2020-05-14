@@ -1,6 +1,8 @@
-# Qualtiy control of BLISS libraries to eachother. Can also be applied on RNA libraries
-# My idea is to bin the libraries and compare the freq of reads in the bin to each other
-# using PCA, distance maps and heatmaps.
+# Author: Gustaw Eriksson
+# Date: 2020-05-14
+
+# Description: Function used in Automate_BLISS_QC.R script doing qualtiy control of 
+# BLISS and sBLISS libraries to eachother.
 
 library(data.table)
 library(stringr)
@@ -348,7 +350,6 @@ BLISS_BIN_QC <- function(normalised_bin, outdir, window_size, suffix, new_window
       target_ggpairs = plot_Correlation_ggpair(target_DF, suffix = target)
       ggsave(file = paste0(outdir, "/", window_size, '_', target, '_ggpairs.png'), plot = target_ggpairs, width=22, height=22, units="in")
       
-      #ggsave(file = paste0(window_size, '_B138+B144_ggpairs.png'), plot = B138_ggpairs, width=8, height=10, units="in")
     }
     
     if (CV_plot == TRUE){
@@ -466,7 +467,6 @@ PLOTTING_WINDOW_CORR <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Outp
   
   first_cell = TRUE
   for (cell in Cell_type) {
-    #matrix_indir = paste0(indir, cell, "/", BLISS_run, "/")
     matrix_indir = paste0(indir, BLISS_run, "/")
     print(matrix_indir)
     cell_matrix = BLISS_window_correlation_DF(indir = matrix_indir, windows = windows, Cell_type = cell, input_matrix = input_matrix)

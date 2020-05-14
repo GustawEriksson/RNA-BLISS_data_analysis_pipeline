@@ -1,3 +1,8 @@
+# Author: Gustaw Eriksson
+# Date: 2020-05-14
+
+# Description: Collection of functions used for RNA analysis in Automate_RNA:analysis.R script
+
 library('DESeq2')
 library('dplyr')
 library('stringr')
@@ -118,8 +123,6 @@ NORMALISATION_TPM = function(dds_count = counts(dds)) {
   count_TPM$rn = gsub("\\..*","", count_TPM$rn)
   count_TPM = left_join(count_TPM, TxDb, by="rn")
   
-  ### CHECK IF THE MAPPLY PART IS WORKING ###
-
   count_TPM[,2:(ncol(count_TPM)-1)] = count_TPM[,2:(ncol(count_TPM)-1)] / count_TPM[,ncol(count_TPM)]
   scale_factor = (base::colSums(count_TPM[2:(ncol(count_TPM)-1)], na.rm = TRUE))/1000000
   count_TPM[,2:(ncol(count_TPM)-1)] = mapply('/', count_TPM[,2:(ncol(count_TPM)-1)], scale_factor)

@@ -1,3 +1,8 @@
+# Author: Gustaw Eriksson
+# Date: 2020-05-14
+
+# Description: Maps DSB frequency over TSS in genes using RNA-sequencing data.
+
 library("Rsubread")
 library("GenomicRanges")
 library(GenomicFeatures)
@@ -305,8 +310,7 @@ PLOT_COUNT <- function(count_DT, count_DT_2 = NULL, count_DT_3 = NULL, window_n)
       geom_vline(xintercept = n_breaks/2 + 1, colour = "red", linetype = "dashed", size = 0.5) +
       scale_x_discrete(name = "Relative position", breaks = c(-n_breaks/2, -n_breaks/4, 0, n_breaks/4 ,n_breaks/2),
                        labels = window_label)
-                       #labels = c("-20Kb", "-10Kb", "TSS", "10Kb", "20Kb"))
-    
+
     ggsave(paste0("Output/DSB_mapping/All_", window_n, "Kb_rough_DSB_TSS_plot.pdf"), plot = plot_TSS_rough,
            device = "pdf")
     

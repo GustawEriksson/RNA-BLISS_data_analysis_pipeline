@@ -1,5 +1,8 @@
-# Description: RNA analysis script which filters RNA data for different expression
-# patterns across cell types.
+# Author: Gustaw Eriksson
+# Date: 2020-05-14
+
+# Description: Runs the DESeq2 differential gene expression pipeline 
+# with quality control and GSEA using clusterProfiler
 
 indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/"
 annotation_file = "/RNA-BLISS_Data_analysis_Pipeline/Data/hg19/annotation/hg19_Gencode19_annotations.all.genes.regions.rds"
@@ -33,9 +36,7 @@ dir.create("results/DE_Heatmaps", showWarnings = FALSE)
 dir.create("tables", showWarnings = FALSE)
 dir.create("results/plots", showWarnings = FALSE)
 dir.create("results/GSEA", showWarnings = FALSE)
-#dir.create(c("results/k-mean_clustering", "results/DE_Heatmaps", "results/tables", "results/plots"))
 
-#strict_filter = TRUE
 dds = LOADING_TO_DESEQ2(merged_qorts_input = merged_qorts_dir, 
                         pre_filtering = FALSE)
 
@@ -82,22 +83,6 @@ if (plot_QC == TRUE) {
   
   dir.create("QC", showWarnings = FALSE)
   
-  # Producing boxplot of Cooks distance. Cook’s distance is a measure of how much a single sample is influencing 
-  # the fitted coefficients for a gene, and a large value of Cook’s distance is intended to indicate an outlier count.
-  #pdf(filename = "QC/Cooks_boxplot.pdf")
-  #par(mar=c(8,5,2,2))
-  #boxplot(log10(assays(dds)[["cooks"]]), range=0, las=2, ylab="Cook's distance", main = "Cook's distance of samples")
-  #dev.off()
-  
-  #melt_Cooks = melt(as.data.table(log10(assays(dds)[["cooks"]])))
-  #ggplot(melt_Cooks, aes(x = variable, y = value)) + stat_boxplot(geom = "errorbar", width = 0.5) + geom_boxplot() + 
-  #  labs(title = "Cook's distance of samples", y = "Cook's distance", x = "") +
-    #main("Cook's distance of samples") + ylab("Cook's distance") + xlab("") +
-  #  theme_cowplot() +
-  #  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
-  #ggsave(filename = "Cooks_boxplot.pdf", plot = Cooks_boxplot, device = "pdf", path = "QC/")
-  
   
   # SD should increase as the mean increase
   vsd <- vst(dds, blind=FALSE)
@@ -138,7 +123,6 @@ if (plot_QC == TRUE) {
     }
   } 
   
-  #png(filename = "QC/MA_plots.png")
   pdf(file = "QC/MA_plots.pdf")
   if (length(res) > 1) {
     par(mfrow=c(1,3), oma = c(0, 0, 2, 0))
@@ -176,9 +160,6 @@ if (plot_QC == TRUE) {
 ## Check which has the best data transformation.
 # For current RNA data, vsd is used.
 dds_selected_df = as.data.frame(colData(dds)[,c("groups", "replicates")])
-#selected_genes = c("RBFOX3", "NES", "SOX2", "TBR1", "EOMES", "PAX6", "MAP2", "DLG4", "SYN1", "GAD65", "pcr1", "PCR2", 
-#                   "EZH1", "EZH2", "BRCA1", "BRCA2", "MYCN", "MYC", "TOP2A", "TOP2B", "UBE3A", "MLL", "GAPDH", "KMT2A",
-#                   "DCX", "XIST", "WWOX", "EMX1", "MECP2", "JARID1C", "HUWE1", "RLIM", "POL2")
 
 selected_genes = c("DAB1", "NEGR1", "LPHN2", "PRKG1", "PCDH15", "CTNNA3", "NRG3", "NAV2", "LRRC4C", "DLG2", "SOX5", "GPC6",
                    "MDGA2", "RBFOX1", "DCC", "CTNNA2", "NCKAP5", "LRP1B", "ERBB4", "MACROD2", "LARGE", "ERC2", "LSAMP", "LPP",

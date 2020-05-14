@@ -1,3 +1,8 @@
+# Author: Gustaw Eriksson
+# Date: 2020-05-14
+
+# Description: Maps chromosome-wide DSB
+
 library("Rmisc")
 library('data.table')
 library('ggplot2')
@@ -293,7 +298,6 @@ MAP_RNA_BLISS <- function(Overlap_genes, RNA_table_dir, Cross_table_dir) {
       saveRDS(Cross_table, file = paste0(Cross_table_dir, Overlap_suffix, "_overlapping_genes.rds"))
     }
     
-    #grid.newpage()  
     venn.plot <- draw.pairwise.venn(area1      = RNA_n,
                                     area2      = Overlap_n,
                                     cross.area = cross_n,

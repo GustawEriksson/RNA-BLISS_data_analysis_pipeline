@@ -1,6 +1,6 @@
 # Author: Gustaw Eriksson
 # Data: 18-12-2019
-# Description: Mapping DSBs across the chromosomes
+# Description: Mapping DSBs across the chromosomes and calculating log2fc of bins between groups
 
 run_chr_dsb_BLISS = chr_WIDE_DSB(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/BLISS", 
                                  cell_types = c("NES", "Progenitor", "Neuron"), BLISS_run = "B138", window_size = "150Kb",
@@ -54,12 +54,10 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
     # Load in the raw count or normalised count table
     load_indir = paste0(indir, BLISS_run, "/", window_size, "/Count_tables/")
     
-    #load_file = paste0(load_indir, "/", list.files(path = load_indir, pattern = paste0(type,"_", window_size, "_bins_raw_count.csv")))
     load_file = paste0(load_indir, list.files(path = load_indir, pattern = paste0(type,"_", window_size, "_bins_raw_count.csv")))
     raw_DT = EDIT_COUNT_DT(count_dt_dir = load_file)
     if (first_merge == TRUE){
       first_merge = FALSE
-      #sum_count = sum(raw_DT[,length(raw_DT)])
       sum_count = sum(raw_DT$Sum_Count)
       merge_raw = raw_DT[-c(4:(length(raw_DT)-1))] %>% mutate(Sum_Count = (Sum_Count/sum_count)*1000000)
       
@@ -68,7 +66,6 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
       names(merge_raw)[length(merge_raw)] = paste0(type, "_Normalised_Sum_Count")
 
     } else if (merge_types == TRUE & first_merge == FALSE) {
-      #sum_count = sum(raw_DT[,length(raw_DT)])
       sum_count = sum(raw_DT$Sum_Count)
       norm_raw_DT = raw_DT %>% mutate(Sum_Count = (Sum_Count/sum_count)*1000000)
       plotting_DSB_chr = PLOT_DSB_CPM_ALL_chr(CPM_DT = norm_raw_DT, plot_title = type, BLISS_run = BLISS_run, window_size = window_size)
@@ -223,8 +220,6 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
     
     for (i in 1:length(map_RNA_BLISS_list)) {
       
-      #pdf(paste0(names(map_RNA_BLISS_list[i]), "_venn_diagram.pdf"))
-      
       pdf(paste0(BLISS_run, "/", window_size, "/Log2FC_analysis/", names(map_RNA_BLISS_list[i]), "_venn_diagram.pdf"))
       
       grid.draw(map_RNA_BLISS_list[[i]])
@@ -239,11 +234,6 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
       
       current_log2fc_type = log2fc_DT[,c(1:3, (log2fc_i+3))]
       names(current_log2fc_type)[4] = "Log2fc"
-      
-      #Checking_bin_genes = CALLING_BIN_GENE(selected_bins = current_log2fc_type, 
-      #                                     log2FC_threshold = log2(1.5),
-      #                                     suffix_comp = log2fc_vector[log2fc_i])
-      
       
       if (global_DSB == TRUE) {
         
@@ -273,10 +263,6 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
         
         current_log2fc = current_log2fc_type[which(current_log2fc_type$chr == chr_vector[[log2fc_j]]),]
         
-        #Checking_bin_genes = CALLING_BIN_GENE(selected_bins = current_log2fc, 
-        #                                     log2FC_threshold = log2(1.5),
-        #                                     suffix_comp = log2fc_vector[log2fc_i])
-        
         current_log2fc = current_log2fc[,-c(1,2)]
         current_log2fc$end = (current_log2fc$end)/1000000
 
@@ -304,9 +290,6 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
         
       }
       
-      ## Insert Radeks chromosome plots here so it will be generated for every comparision
-      ####3 ALL chrOMOSOMES ANALYSIS
-      
       current_log2fc_type$chr <- factor(current_log2fc_type$chr, levels=unique(current_log2fc_type$chr))
       
       stat1 <- current_log2fc_type %>%
@@ -323,10 +306,7 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
       #Boxplot
       ggplot(current_log2fc_type) +
         geom_boxplot(aes(y = Log2fc, x = chr)) +
-        #geom_hline(aes(yintercept = 0), color = "red") +
         geom_hline(yintercept = c(0, log2(log2_limit), -log2(log2_limit)), color=c("black", "red", "red"), linetype = c("solid", "dashed", "dashed")) +
-        #coord_cartesian(ylim = lim) +
-        #geom_errorbar(data = stat1, aes(x = chr, ymin = int1 - mean, ymax = int2 - mean), color = "red") +
         geom_errorbar(data = stat1, aes(x = chr, ymin = int1 - mean, ymax = int2 - mean), color = "red") +
         stat_summary(fun.y = "mean", geom="point", aes(y = Log2fc, x = chr)) +
         scale_x_discrete(limits = c(levels(current_log2fc_type$chr))) +
@@ -338,9 +318,7 @@ chr_WIDE_DSB <- function(indir = "/RNA-BLISS_Data_analysis_Pipeline/Output/",
       #Take a closer look at the distribution with violin plots!
       ggplot(current_log2fc_type) +
         geom_violin(aes(y = Log2fc, x = chr)) +
-        #geom_hline(aes(yintercept = 0), color = "red") +
         geom_hline(yintercept = c(0, log2(log2_limit), -log2(log2_limit)), color=c("black", "red", "red"), linetype = c("solid", "dashed", "dashed")) +
-        #coord_cartesian(ylim = lim) +
         geom_errorbar(data = stat1, aes(x = chr, ymin = int1 - mean, ymax = int2 - mean), color = "red") +
         stat_summary(fun.y = "mean", geom="point", aes(y = Log2fc, x = chr), color = "red") +
         stat_summary(fun.y = "median", geom="point", aes(y = Log2fc, x = chr), color = "blue") +
