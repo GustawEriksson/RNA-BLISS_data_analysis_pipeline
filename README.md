@@ -1,12 +1,12 @@
 README
 
+                      RNA-BLISS data analysis pipeline
+        A data analysis pipeline for RNA-sequencing and BLISS data
+
 Author: Gustaw Eriksson
 Date: 2020-05-14
 Version: 1.0
 Contact: gustaw.eriksson@ki.se
-
-                      RNA-BLISS data analysis pipeline
-        A data analysis pipeline for RNA-sequencing and BLISS data
 
 The RNA-BLISS data analysis pipeline for RNA-sequencing and BLISS data, is used
 to  process and analyse QoRTs formatted RNA-sequencing and BED-formatted BLISS
