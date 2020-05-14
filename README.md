@@ -46,10 +46,10 @@ different folder contain and how the scripts were used:
   The pipeline requires a set file directory architecture of three folders within
   the RNA-BLISS_Data_analysis_Pipeline folder:
 
-    /Data/: The data folder should contain four folders called Bedtools_windows, 
+    Data/: The data folder should contain four folders called Bedtools_windows, 
     BLISS_bed, hg19 and RNA_data:
 
-      /Bedtools_windows/: Contains the Bedtools makewindow BED files further explained below. 
+      Bedtools_windows/: Contains the Bedtools makewindow BED files further explained below. 
       The BED files should be of the different window sizes the user want to test and apply on 
       the BLISS data.
 
@@ -61,24 +61,24 @@ different folder contain and how the scripts were used:
         BLISS = 10kb, 50kb, 100kb, 150kb, 200kb, 250kb, 300kb
         sBLISS = 1kb, 5kb, 10kb, 15kb, 20kb, 25kb, 30kb, 35kb, 40kb, 45kb, 50kb
 
-      /BLISS_bed/: In the manuscript the program was written and applied on, the folder contained 
+      BLISS_bed/: In the manuscript the program was written and applied on, the folder contained 
       two subfolders: /BLISS_bed/B138/ and /BLISS_bed/sBLISS/, containing the BLISS BED files.
 
-      /hg19/: Contained hg19.fa (full hg19 reference genome) and hg19.genome (chromosome sizes) 
+      hg19/: Contained hg19.fa (full hg19 reference genome) and hg19.genome (chromosome sizes) 
       downloaded from USSC and gencode.v19.annotation.gtf (annotated hg19) downloaded from GENCODE. 
       The folder also contains a subfolder /annotation/ with the gencode.v19.annotation.gtf converted 
       to a .rds object called hg19_Gencode19_annotations.all.genes.regions.
 
-      /RNA_data/: The folder is divided into two subfolders, RNA_BAM containing the RNA-sequencing BAM 
+      RNA_data/: The folder is divided into two subfolders, RNA_BAM containing the RNA-sequencing BAM 
       files and RNA_qorts, containing the QoRTs formatted RNA-sequencing files.
 
-    /Output/: When the program is first loaded, this folder should be empty. Running the R-scripts will 
+    Output/: When the program is first loaded, this folder should be empty. Running the R-scripts will 
     generate subfolder within this folder containing output data and results.
 
-    /Scripts/: The folder shall contain all the scripts part of the RNA-BLISS-Data_analysis_Pipeline. The 
+    Scripts/: The folder shall contain all the scripts part of the RNA-BLISS-Data_analysis_Pipeline. The 
     script are divided between four different folders:
 
-      /BLISS_analysis/: Contains the Automate_BLISS_QC.R and BLISS_functions.R. The Automate_BLISS_QC.R 
+      BLISS_analysis/: Contains the Automate_BLISS_QC.R and BLISS_functions.R. The Automate_BLISS_QC.R 
       processes and run quality control on the BLISS data. The code is to be run on both the BLISS and 
       sBLISS data, which is default. The code calls functions from the BLISS_functions.R script. When 
       Automate_BLISS_QC.R is open in RStudio, the user can change input and output directories, and which 
@@ -89,7 +89,7 @@ different folder contain and how the scripts were used:
       downstream analysis. The default window for BLISS and sBLISS in the current version are 150kb and 10kb 
       respectively.
 
-      /RNA_analysis/: Within the folder, are two scripts, the Automate_RNA_analysis.R which runs the DESeq2 
+      RNA_analysis/: Within the folder, are two scripts, the Automate_RNA_analysis.R which runs the DESeq2 
       (v1.24.0) pipeline including quality control and GSEA by clusterProfiler (v.3.0.4), and 
       RNA_analysis_tools.R which keeps functions used in the Automate_RNA_analysis.R script.
 
@@ -125,7 +125,7 @@ different folder contain and how the scripts were used:
       an increased or decreased frequency of DSB, it must have a log2fc below or above the set log2fc threshold, which 
       default setting in Function_DSB_TSS.R is -1.5/1.5.
 
-      /Data_handling/: The folder contains the core_functions.R by Jesko Wagner, that loads BLISS-data and is used in 
+      Data_handling/: The folder contains the core_functions.R by Jesko Wagner, that loads BLISS-data and is used in 
       /DSB_mapping_tools.R.
 
 Data availability:
