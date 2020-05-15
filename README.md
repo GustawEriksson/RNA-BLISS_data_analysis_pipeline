@@ -39,10 +39,10 @@ Contact: gustaw.eriksson@ki.se
 The RNA-BLISS data analysis pipeline for RNA-sequencing and BLISS data, is used
 to  process and analyse QoRTs formatted RNA-sequencing and BED-formatted BLISS
 data. The pipeline processes the datasets separately, performing differential
-gene expression analysis on the RNA-seq data and mapping DNS
-chromosome-wide double-strand breaks (DSB), before coupling the datasets. After 
-coupling, the pipeline analysis and outputs information whether there is an 
-relationship between gene expression and the accumulation of DSB.
+gene expression analysis on the RNA-seq data and mapping chromosome-wide DNA 
+double-strand breaks (DSB), before coupling the datasets. After coupling, the 
+pipeline analysis and outputs information whether there is an relationship 
+between gene expression and the accumulation of DSB.
 
 In its current version, the pipeline requires a strict file directory
 architecture which construction is mapped out below. To build it, requires the
