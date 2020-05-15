@@ -39,10 +39,10 @@ Contact: gustaw.eriksson@ki.se
 The RNA-BLISS data analysis pipeline for RNA-sequencing and BLISS data, is used
 to  process and analyse QoRTs formatted RNA-sequencing and BED-formatted BLISS
 data. The pipeline processes the datasets separately, performing differential
-gene expression analysis on the RNA-seq data and mapping chromosome-wide double-
-strand breaks (DSB), before coupling the datasets. After coupling, the pipeline
-analysis and outputs information whether there is an relationship between gene
-expression and the accumulation of DSB.
+gene expression analysis on the RNA-seq data and mapping DNS
+chromosome-wide double-strand breaks (DSB), before coupling the datasets. After 
+coupling, the pipeline analysis and outputs information whether there is an 
+relationship between gene expression and the accumulation of DSB.
 
 In its current version, the pipeline requires a strict file directory
 architecture which construction is mapped out below. To build it, requires the
@@ -50,7 +50,7 @@ use of Bedtools (v.2.29.2) and separate input in bash (v.3.2.57), also described
 below.
 
 The pipeline consists of several R-scripts, to be executed separately in an set
-order to reproduce the computational pipeline described in "Understanding
+order to reproduce the computational pipeline described in "Understanding DNA
 double-strand breaks and genome fragility across neurodifferentiation"
 manuscript by Gustaw Eriksson (2020). For data to reproduce the computational 
 pipeline, please read the Data availability section further down. The scripts where 
@@ -66,7 +66,7 @@ errors and false results.
 
 Usage:
 Bellow follows instruction on how to run the RNA-BLISS data analysis pipeline
-and reproduce the results of "Understanding double-strand breaks and genome
+and reproduce the results of "Understanding DNA double-strand breaks and genome
 fragility across neurodifferentiation". It shows how the file directory was built, what 
 the different folder contain and how the scripts were used:
 
