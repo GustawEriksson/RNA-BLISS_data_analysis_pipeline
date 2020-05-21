@@ -36,6 +36,7 @@ Version: 1.0
 
 Contact: gustaw.eriksson@ki.se
 
+## Introduction
 The RNA-BLISS data analysis pipeline for RNA-sequencing and BLISS data, is used
 to  process and analyse QoRTs formatted RNA-sequencing and BED-formatted BLISS
 data. The pipeline processes the datasets separately, performing differential
@@ -64,17 +65,18 @@ on a different experimental layout involves risks and errors. Therefore, the cur
 version is mere an experimental code NOT to be used without acknowledging the risks for 
 errors and false results.
 
-Usage:
+## Usage:
 Bellow follows instruction on how to run the RNA-BLISS data analysis pipeline
 and reproduce the results of "Understanding DNA double-strand breaks and genome
 fragility across neurodifferentiation". It shows how the file directory was built, what 
 the different folder contain and how the scripts were used:
 
-  File directory architecture:
+  ## File directory architecture:
   The pipeline requires a set file directory architecture of three folders within
   the RNA-BLISS_Data_analysis_Pipeline folder:
 
-    /Data/: The data folder should contain four folders called Bedtools_windows, BLISS_bed, 
+    /Data/: 
+    The data folder should contain four folders called Bedtools_windows, BLISS_bed, 
     hg19 and RNA_data:
 
       /Bedtools_windows/: Contains the Bedtools makewindow BED files further explained below. 
@@ -162,7 +164,7 @@ the different folder contain and how the scripts were used:
       /Data_handling/: The folder contains the core_functions.R by Jesko Wagner, that loads BLISS-data 
       and is used in /DSB_mapping_tools.R.
 
-Data availability:
+## Data availability:
 The data used to program this data analysis pipeline, was generated at the Department of Medical 
 Biochemistry and Biophysics, Karolinska Institute by the Laboratory of Quantative Genome Biology led by 
 Nicola Crosetto. The data is currently not public.
