@@ -86,11 +86,13 @@ hg19 and RNA_data:
 
   The Bedtools (v.2.29.2) makewindow command was used in Bash in the following way, 
   where N is the window size:
-    bedtools makewindows -g hg19.genome -w N > N_window
+    
+      > bedtools makewindows -g hg19.genome -w N > N_window
 
   The generated windows for the manuscript were:
-    BLISS = 10kb, 50kb, 100kb, 150kb, 200kb, 250kb, 300kb
-    sBLISS = 1kb, 5kb, 10kb, 15kb, 20kb, 25kb, 30kb, 35kb, 40kb, 45kb, 50kb
+      
+      BLISS = 10kb, 50kb, 100kb, 150kb, 200kb, 250kb, 300kb
+      sBLISS = 1kb, 5kb, 10kb, 15kb, 20kb, 25kb, 30kb, 35kb, 40kb, 45kb, 50kb
 
   #### /Data/BLISS_bed/: 
   In the manuscript the program was written and applied on, the folder 
@@ -134,6 +136,7 @@ The script are divided between four different folders:
   RNA_analysis_tools.R which keeps functions used in the Automate_RNA_analysis.R script.
 
   When Automate_RNA_analysis.R is used, the default thresholds are:
+    
     log2fc = -1/1
     p-value = <0.05
     TPM = 1
