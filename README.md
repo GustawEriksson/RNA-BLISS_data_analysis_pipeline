@@ -87,7 +87,7 @@ hg19 and RNA_data:
   The Bedtools (v.2.29.2) makewindow command was used in Bash in the following way, 
   where N is the window size:
     
-      > bedtools makewindows -g hg19.genome -w N > N_window
+      > bedtools makewindows -g /Data/hg19/hg19.genome -w N > N_window
 
   The generated windows for the manuscript were:
       
@@ -96,12 +96,13 @@ hg19 and RNA_data:
       
    Using Bedtools intersect, the BLISS data was binned using the window files:
    
-      > bedtools intersect -a BLISS.bed -b N_window > BLISS_N.bed
+      > bedtools intersect -a /Data/BLISS.bed -b N_window > /Data/BLISS_bed/B138/BLISS_N.bed
+      > bedtools intersect -a /Data/BLISS.bed -b N_window > /Data/BLISS_bed/sBLISS/BLISS_N.bed
 
   #### /Data/BLISS_bed/: 
   In the manuscript the program was written and applied on, the folder 
-  contained two subfolders: /BLISS_bed/B138/ and /BLISS_bed/sBLISS/,containing the BLISS 
-  BED files.
+  contained two subfolders: /BLISS_bed/B138/ and /BLISS_bed/sBLISS/,containing the raw BLISS 
+  BED files and the binned BED files.
 
   #### /Data/hg19/: 
   Contained hg19.fa (full hg19 reference genome) and hg19.genome (chromosome sizes) 
