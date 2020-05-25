@@ -93,6 +93,10 @@ hg19 and RNA_data:
       
       BLISS = 10kb, 50kb, 100kb, 150kb, 200kb, 250kb, 300kb
       sBLISS = 1kb, 5kb, 10kb, 15kb, 20kb, 25kb, 30kb, 35kb, 40kb, 45kb, 50kb
+      
+   Using Bedtools intersect, the BLISS data was binned using the window files:
+   
+      > bedtools intersect -a BLISS.bed -b N_window > BLISS_N.bed
 
   #### /Data/BLISS_bed/: 
   In the manuscript the program was written and applied on, the folder 
